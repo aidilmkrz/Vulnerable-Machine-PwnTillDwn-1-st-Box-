@@ -67,7 +67,7 @@ To conclude the engagement, the web shell was deleted from the server to minimiz
 * **Cleanup Command:** `del C:\xampp\htdocs\upload\2\shell.PhP`
     ![Executing Cleanup](./Screenshots/clearfile.png)
 * **Verification:** A 403 Forbidden error confirmed the shell was successfully removed and the directory was secured.
-    ![Cleanup Verification](./Screenshots/image_5acec6.png)
+    ![Cleanup Verification](./screenshot/clearfile.png)
 
 ---
 *Developed for educational purposes in a controlled lab environment.*
