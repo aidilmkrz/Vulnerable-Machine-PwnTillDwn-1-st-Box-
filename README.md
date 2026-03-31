@@ -50,11 +50,11 @@ The server employed a blacklist filter to prevent the upload of `.php` files.
 With SYSTEM privileges, I performed local enumeration to find the target data.
 
 * **Directory Discovery:** Searched the Administrator's Desktop and found the flag file.
-    ![Searching for Flag](./Screenshots/foundflagname.png)
+    ![Searching for Flag](./screenshot/foundflagname.png)
 * **Flag Location:** Confirmed the file path and presence of `FLAG1.txt`.
-    ![Flag Path Confirmation](./Screenshots/locatedflag.png)
+    ![Flag Path Confirmation](./screenshot/locatedflag.png)
 * **Flag Capture:** Used the `type` command to extract the secret key.
-    ![Flag Captured](./Screenshots/image_5ac03d.png)
+    ![Flag Captured](./screenshot/flagfound.png)
 
 **Flag:** `PwnTillDawnAcademyIsAwesome!!!`
 
