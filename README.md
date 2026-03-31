@@ -65,7 +65,7 @@ With SYSTEM privileges, I performed local enumeration to find the target data.
 To conclude the engagement, the web shell was deleted from the server to minimize the forensic footprint. 
 
 * **Cleanup Command:** `del C:\xampp\htdocs\upload\2\shell.PhP`
-    ![Executing Cleanup](./screenshot/blank.png)
+    ![Executing Cleanup](./screenshot/executing.png)
 * **Verification:** A 403 Forbidden error confirmed the shell was successfully removed and the directory was secured.
     ![Cleanup Verification](./screenshot/clearfile.png)
 
