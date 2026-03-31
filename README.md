@@ -16,7 +16,7 @@ The engagement began by establishing a connection to the lab network and identif
 * **Host Discovery:** Nmap scan confirmed the target at `10.150.150.11`.
     ![Nmap Discovery](./screenshot/nmapscanning.png)
 * **Service Enumeration:** A full port scan identified HTTP (80) and HTTPS (443) services running on an Apache server.
-    ![Service Scan](./screenshot/image_6633c5.png)
+    ![Service Scan](./screenshot/nmap10.150.150.11.png)
 
 ---
 
@@ -53,7 +53,6 @@ With SYSTEM privileges, I performed local enumeration to find the target data.
     ![Searching for Flag](./screenshot/foundflagname.png)
 * **Flag Location:** Confirmed the file path and presence of `FLAG1.txt`.
     ![Flag Path Confirmation](./screenshot/locatedflag.png)
-  
 * **Flag Capture:** Used the `type` command to extract the secret key.
     ![Flag Captured](./screenshot/flagfound.png)
 
