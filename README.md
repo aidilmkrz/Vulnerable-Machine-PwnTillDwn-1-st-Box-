@@ -52,7 +52,7 @@ With SYSTEM privileges, I performed local enumeration to find the target data.
 * **Directory Discovery:** Searched the Administrator's Desktop and found the flag file.
     ![Searching for Flag](./screenshot/foundflagname.png)
 * **Flag Location:** Confirmed the file path and presence of `FLAG1.txt`.
-    ![Flag Path Confirmation](./screenshot/locatedflag.png)
+    
 * **Flag Capture:** Used the `type` command to extract the secret key.
     ![Flag Captured](./screenshot/flagfound.png)
 
