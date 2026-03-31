@@ -41,7 +41,7 @@ The server employed a blacklist filter to prevent the upload of `.php` files.
     ![Uploading Shell](./screenshot/uploadshellfile.png)
 * **Execution:** The server accepted the renamed file and processed it as executable code.
 * **Access Verification:** Running the `whoami` command confirmed the shell was running as **`nt authority\system`**.
-    ![RCE and Whoami Proof](./Screenshots/image_663429.png)
+    ![RCE and Whoami Proof](./screenshot/nt.png)
 
 ---
 
