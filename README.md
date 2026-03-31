@@ -25,7 +25,7 @@ The engagement began by establishing a connection to the lab network and identif
 Upon visiting the web application, I identified a file upload portal named **PwnDrive**. 
 
 * **Initial Access:** Navigated to the site to confirm it was live.
-    ![Opening Web Portal](./Screenshots/openipwebsite.png)
+    ![Opening Web Portal](./screenshot/openipwebsite.png)
 * **Authentication:** Located the administrative login page to reach the upload interface.
     ![Login Interface](./Screenshots/loginpage.png)
 * **Exploit Research:** `searchsploit` was used to check for known vulnerabilities in the PwnDrive software; however, no public exploits were found.
