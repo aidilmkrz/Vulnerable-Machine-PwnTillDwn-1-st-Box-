@@ -54,7 +54,7 @@ With SYSTEM privileges, I performed local enumeration to find the target data.
 * **Flag Location:** Confirmed the file path and presence of `FLAG1.txt`.
     ![Flag Path Confirmation](./screenshot/locatedflag.png)
 * **Flag Capture:** Used the `type` command to extract the secret key.
-    ![Flag Captured](./screenshot/flagfound.png)
+    ![Flag Captured](./screenshot/ff.png)
 
 **Flag:** `PwnTillDawnAcademyIsAwesome!!!`
 
