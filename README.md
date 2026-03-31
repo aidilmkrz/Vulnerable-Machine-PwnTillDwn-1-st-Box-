@@ -11,7 +11,7 @@
 The engagement began by establishing a connection to the lab network and identifying the target host.
 
 * **VPN Initialization:** Connection established via OpenVPN.
-    ![VPN Connection](./Screenshots/image_66338a.png)
+    ![VPN Connection](./screenshot/image_66338a.png)
 * **Host Discovery:** Nmap scan confirmed the target at `10.150.150.11`.
     ![Nmap Discovery](./Screenshots/image_6633a8.png)
 * **Service Enumeration:** A full port scan identified HTTP (80) and HTTPS (443) services running on an Apache server.
