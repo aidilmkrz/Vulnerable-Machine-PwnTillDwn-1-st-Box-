@@ -27,9 +27,9 @@ Upon visiting the web application, I identified a file upload portal named **Pwn
 * **Initial Access:** Navigated to the site to confirm it was live.
     ![Opening Web Portal](./screenshot/openipwebsite.png)
 * **Authentication:** Located the administrative login page to reach the upload interface.
-    ![Login Interface](./Screenshots/loginpage.png)
+    ![Login Interface](./screenshot/loginpage.png)
 * **Exploit Research:** `searchsploit` was used to check for known vulnerabilities in the PwnDrive software; however, no public exploits were found.
-    ![Searchsploit Results](./Screenshots/searchsploit.png)
+    ![Searchsploit Results](./screenshot/searchsploit.png)
 
 ---
 
@@ -38,7 +38,7 @@ Upon visiting the web application, I identified a file upload portal named **Pwn
 The server employed a blacklist filter to prevent the upload of `.php` files. 
 
 * **The Bypass:** Uploaded a web shell using a case-sensitivity bypass by changing the extension to `.PhP`.
-    ![Uploading Shell](./Screenshots/uploadshellfile.png)
+    ![Uploading Shell](./screenshot/uploadshellfile.png)
 * **Execution:** The server accepted the renamed file and processed it as executable code.
 * **Access Verification:** Running the `whoami` command confirmed the shell was running as **`nt authority\system`**.
     ![RCE and Whoami Proof](./Screenshots/image_663429.png)
