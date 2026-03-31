@@ -53,7 +53,7 @@ With SYSTEM privileges, I performed local enumeration to find the target data.
     ![Searching for Flag](./screenshot/foundflagname.png)
 * **Flag Location:** Confirmed the file path and presence of `FLAG1.txt`.
     ![Flag Path Confirmation](./screenshot/locatedflag.png)
-* **Flag Capture:** Used the `type` command to extract the secret key.
+* **Flag Capture:** Used the `type` command to extract the secret key. (http://10.150.150.11/upload/2/shell.PhP?cmd=type C:\Users\Administrator\Desktop\FLAG1.txt)
     ![Flag Captured](./screenshot/ff.png)
 
 **Flag:** `PwnTillDawnAcademyIsAwesome!!!`
