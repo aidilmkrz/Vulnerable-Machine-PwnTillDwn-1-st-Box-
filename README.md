@@ -186,31 +186,23 @@ PwnTillDawnAcademyIsAwesome!!!
 
 ---
 
-## 🧠 Lessons Learned
+## Lessons Learned
 
-- Default credentials pose a critical security risk  
-- Blacklist-based filtering is ineffective against attackers  
-- File upload vulnerabilities can lead to full system compromise  
-- Running services with SYSTEM privileges is highly dangerous  
-- Proper security configuration is essential for defense  
+- Weak passwords can lead to easy system access  
+- File upload features can be dangerous if not secured  
+- System misconfiguration can give full control to attackers  
 
 ---
 
-## 🔐 Mitigation Recommendations
+## Mitigation
 
-- Enforce strong authentication and remove default credentials  
-- Implement whitelist-based file validation  
-- Disable execution in upload directories  
-- Apply least privilege principle to services  
-- Regularly audit and secure configurations  
+- Use strong usernames and passwords  
+- Restrict file uploads properly  
+- Limit system privileges  
 
 ---
 
-## 🏁 Conclusion
+## Conclusion
 
-This assessment demonstrates how multiple vulnerabilities — including weak authentication and insecure file upload handling — can be chained together to achieve full system compromise. The attack highlights the importance of secure coding practices and proper system configuration.
+This lab shows how simple weaknesses can be combined to gain full access to a system.
 
----
-
-## ⚠️ Disclaimer
-This project was conducted in a controlled lab environment for educational purposes only.
