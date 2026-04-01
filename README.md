@@ -38,10 +38,12 @@ nmap -sC -sV 10.150.150.11
 ```
 
 **Findings:**
-- Port 80 (HTTP) – Apache Web Server
-- Port 443 (HTTPS) – Secure Web Service
+- Port 80 (HTTP) – Apache Web Server  
+- Port 443 (HTTPS) – Secure Web Service  
 
 ![Service Scan](./screenshot/nmap10.150.150.11.png)
+
+These services indicated a web application as the primary attack surface.
 
 ---
 
@@ -58,6 +60,20 @@ The web portal was confirmed to be accessible via a browser.
 An administrative login page was discovered, which provided access to the upload functionality.
 
 ![Login Interface](./screenshot/loginpage.png)
+
+### Weak Credential Discovery
+Basic credential testing was performed using common default usernames and passwords.
+
+The login was successfully bypassed using:
+```
+Username: admin
+Password: admin
+```
+
+### Impact
+This indicates the presence of **weak/default credentials**, allowing unauthorized users to gain administrative access without any brute-force or advanced attack techniques.
+
+This significantly exposes sensitive functionality such as file uploads.
 
 ### Exploit Research
 To identify known vulnerabilities, `searchsploit` was used:
@@ -156,6 +172,7 @@ A **403 Forbidden** response confirmed that the file was successfully removed:
 
 ## 🧠 Lessons Learned
 
+- Default credentials are a critical security risk and must be changed immediately  
 - Blacklist-based file filtering is insecure and easily bypassed  
 - File upload functionalities must enforce strict validation and sanitization  
 - Running web services with SYSTEM privileges introduces severe risk  
@@ -165,6 +182,7 @@ A **403 Forbidden** response confirmed that the file was successfully removed:
 
 ## 🔐 Mitigation Recommendations
 
+- Enforce strong authentication policies and remove default credentials  
 - Implement **whitelist-based file validation**  
 - Enforce **case-insensitive filtering**  
 - Disable execution permissions in upload directories  
@@ -175,7 +193,7 @@ A **403 Forbidden** response confirmed that the file was successfully removed:
 
 ## 🏁 Conclusion
 
-This lab demonstrates how a weak file upload mechanism combined with improper privilege configuration can lead to **full system compromise**. By exploiting a simple validation flaw, it was possible to achieve RCE and directly obtain SYSTEM-level access.
+This lab demonstrates how multiple weak security controls — including default credentials and insecure file upload validation — can lead to **full system compromise**. By chaining these vulnerabilities, it was possible to gain administrative access, achieve RCE, and obtain SYSTEM-level privileges.
 
 ---
 
