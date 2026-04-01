@@ -6,9 +6,19 @@
 
 ---
 
-## 1. 🔎 Phase 1: Reconnaissance & Network Mapping
+## 📌 Methodology: 6 Phases of System Hacking
+1. Reconnaissance  
+2. Scanning  
+3. Gaining Access  
+4. Privilege Escalation  
+5. Maintaining Access  
+6. Clearing Tracks  
 
-The assessment began by establishing connectivity to the lab environment and identifying the target host.
+---
+
+## 1. 🔎 Reconnaissance
+
+The engagement began by gathering basic information about the target environment.
 
 ### VPN Connection
 A secure connection to the lab network was established via OpenVPN.
@@ -16,23 +26,29 @@ A secure connection to the lab network was established via OpenVPN.
 ![VPN Connection](./screenshot/vpnconnection.png)  
 ![VPN Connection](./screenshot/initializationsequencecomplete.png)
 
-### Host Discovery
-An initial scan was conducted to identify active hosts within the network.
+### Target Identification
+The target machine was identified within the network range:
 
-```bash
-nmap -sn 10.150.150.0/24
-```
-
-The target machine was identified at:
 ```
 10.150.150.11
+```
+
+This phase focuses on understanding the environment before active interaction.
+
+---
+
+## 2. 📡 Scanning
+
+Active scanning was performed to identify open ports and running services.
+
+### Host Discovery
+```bash
+nmap -sn 10.150.150.0/24
 ```
 
 ![Nmap Discovery](./screenshot/nmapscanning.png)
 
 ### Service Enumeration
-A more detailed scan was performed to identify open ports and running services:
-
 ```bash
 nmap -sC -sV 10.150.150.11
 ```
@@ -43,60 +59,38 @@ nmap -sC -sV 10.150.150.11
 
 ![Service Scan](./screenshot/nmap10.150.150.11.png)
 
-These services indicated a web application as the primary attack surface.
+These results indicate that a web application is the primary attack surface.
 
 ---
 
-## 2. 🔍 Phase 2: Vulnerability Analysis
+## 3. 🔓 Gaining Access
 
-Upon accessing the web service, a file upload platform named **PwnDrive** was identified.
+This phase focused on exploiting vulnerabilities to obtain initial access.
 
-### Web Application Access
-The web portal was confirmed to be accessible via a browser.
+### Web Application Analysis
+The web application **PwnDrive** was identified as the entry point.
 
 ![Opening Web Portal](./screenshot/openipwebsite.png)
 
-### Authentication Mechanism
-An administrative login page was discovered, which provided access to the upload functionality.
+### Authentication Bypass (Weak Credentials)
+An administrative login page was discovered.
 
 ![Login Interface](./screenshot/loginpage.png)
 
-### Weak Credential Discovery
-Basic credential testing was performed using common default usernames and passwords.
+Basic credential testing revealed valid default credentials:
 
-The login was successfully bypassed using:
 ```
 Username: admin
 Password: admin
 ```
 
-### Impact
-This indicates the presence of **weak/default credentials**, allowing unauthorized users to gain administrative access without any brute-force or advanced attack techniques.
+This allowed unauthorized access to the admin panel.
 
-This significantly exposes sensitive functionality such as file uploads.
+### Vulnerability Identification
+The file upload functionality was found to use a **blacklist filter**, blocking `.php` files.
 
-### Exploit Research
-To identify known vulnerabilities, `searchsploit` was used:
-
-```bash
-searchsploit pwndrive
-```
-
-![Searchsploit Results](./screenshot/searchsploit.png)
-
-No publicly available exploits were found, indicating the need for manual testing.
-
----
-
-## 3. 💥 Phase 3: Exploitation (File Upload Bypass)
-
-During testing, the file upload functionality was found to implement a **blacklist-based filter**, blocking `.php` files.
-
-### Vulnerability
-The filter failed to properly validate file extensions in a case-insensitive manner.
-
-### Exploitation Technique
-A web shell was uploaded using a mixed-case extension:
+### Exploitation (File Upload Bypass)
+The filter was bypassed using a mixed-case extension:
 
 ```
 shell.PhP
@@ -104,10 +98,8 @@ shell.PhP
 
 ![Uploading Shell](./screenshot/uploadshellfile.png)
 
-### Remote Code Execution
-The server accepted the file and executed it as PHP code.
-
-To verify command execution:
+### Remote Code Execution (RCE)
+The uploaded shell was accessed via:
 
 ```
 http://10.150.150.11/upload/2/shell.PhP?cmd=whoami
@@ -120,21 +112,63 @@ http://10.150.150.11/upload/2/shell.PhP?cmd=whoami
 nt authority\system
 ```
 
-This indicates a **critical misconfiguration**, as the web server is running with SYSTEM-level privileges.
+Initial access was successfully obtained with SYSTEM-level privileges.
 
 ---
 
-## 4. 🔑 Phase 4: Post-Exploitation & Flag Retrieval
+## 4. 🔑 Privilege Escalation
 
-With SYSTEM-level access obtained, local enumeration was performed to locate sensitive files.
+In this scenario, privilege escalation was not required.
 
-### Directory Enumeration
-The Administrator's Desktop directory was explored:
+The web server was already running with **SYSTEM privileges**, which is a critical misconfiguration.
 
-![Searching for Flag](./screenshot/foundflagname.png)
+This provided full administrative control over the system immediately after exploitation.
 
-### Flag Identification
-The target file `FLAG1.txt` was located:
+---
+
+## 5. 🔁 Maintaining Access
+
+To maintain access, the uploaded web shell can be reused for persistent command execution.
+
+### Persistence Method
+- The web shell remains accessible via browser
+- Allows continuous remote command execution
+
+Example:
+```
+http://10.150.150.11/upload/2/shell.PhP?cmd=dir
+```
+
+This acts as a backdoor into the system as long as the file is not removed.
+
+---
+
+## 6. 🧹 Clearing Tracks
+
+To minimize detection and forensic evidence, cleanup actions were performed.
+
+### Removing Web Shell
+```
+del C:\xampp\htdocs\upload\2\shell.PhP
+```
+
+![Executing Cleanup](./screenshot/executing.png)
+
+### Verification
+A **403 Forbidden** response confirmed successful removal:
+
+![Cleanup Verification](./screenshot/clearfile.png)
+
+---
+
+## 🎯 Flag Retrieval
+
+With SYSTEM access, sensitive files were explored.
+
+### Flag Location
+```
+C:\Users\Administrator\Desktop\FLAG1.txt
+```
 
 ![Flag Path Confirmation](./screenshot/locatedflag.png)
 
@@ -152,48 +186,29 @@ PwnTillDawnAcademyIsAwesome!!!
 
 ---
 
-## 5. 🧹 Phase 5: Cleanup (Covering Tracks)
-
-To reduce the forensic footprint, the uploaded web shell was removed from the server.
-
-### Cleanup Command
-```
-del C:\xampp\htdocs\upload\2\shell.PhP
-```
-
-![Executing Cleanup](./screenshot/executing.png)
-
-### Verification
-A **403 Forbidden** response confirmed that the file was successfully removed:
-
-![Cleanup Verification](./screenshot/clearfile.png)
-
----
-
 ## 🧠 Lessons Learned
 
-- Default credentials are a critical security risk and must be changed immediately  
-- Blacklist-based file filtering is insecure and easily bypassed  
-- File upload functionalities must enforce strict validation and sanitization  
-- Running web services with SYSTEM privileges introduces severe risk  
-- Proper privilege separation is critical in secure system design  
+- Default credentials pose a critical security risk  
+- Blacklist-based filtering is ineffective against attackers  
+- File upload vulnerabilities can lead to full system compromise  
+- Running services with SYSTEM privileges is highly dangerous  
+- Proper security configuration is essential for defense  
 
 ---
 
 ## 🔐 Mitigation Recommendations
 
-- Enforce strong authentication policies and remove default credentials  
-- Implement **whitelist-based file validation**  
-- Enforce **case-insensitive filtering**  
-- Disable execution permissions in upload directories  
-- Run services with **least privilege accounts**  
-- Regularly audit and harden configurations  
+- Enforce strong authentication and remove default credentials  
+- Implement whitelist-based file validation  
+- Disable execution in upload directories  
+- Apply least privilege principle to services  
+- Regularly audit and secure configurations  
 
 ---
 
 ## 🏁 Conclusion
 
-This lab demonstrates how multiple weak security controls — including default credentials and insecure file upload validation — can lead to **full system compromise**. By chaining these vulnerabilities, it was possible to gain administrative access, achieve RCE, and obtain SYSTEM-level privileges.
+This assessment demonstrates how multiple vulnerabilities — including weak authentication and insecure file upload handling — can be chained together to achieve full system compromise. The attack highlights the importance of secure coding practices and proper system configuration.
 
 ---
 
